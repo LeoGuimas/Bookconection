@@ -5,32 +5,39 @@
   font-size: 16px;
   text-align: start;
 
+  label {
+    margin-bottom: 20px;
+    font-size: 18px
+  }
+
   .input-content {
     width: 100%;
     border-radius: 8px;
     display: flex;
 
     .icon{
-      padding: 14px;
+      padding: 18px;
       background-color: $primary-color;
       border-radius: 0 8px 8px 0;
       display: flex;
-      img{
-        height: 20px;
-      }
+      justify-content: center;
+      align-items: center;
+        img{
+          width: 20px;
+          height: 20px;
+        }
     }
+
     input{
       border: none;
       border-radius: 8px 0 0 8px;
       background-color: $gray;
       padding: 20px 0 20px 20px;
       width: 100%;
-    }
 
+      font-size: 16px;
     }
 
   }
 
-
-
-
+}
