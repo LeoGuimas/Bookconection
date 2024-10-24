@@ -2,6 +2,8 @@
     title="Login into your account"
     primaryBtnText="Login Now"
     secundaryBtnText="Signup Now"
+    (submit)="submit()"
+    (navigate)="navigate()"
 >
   <form [formGroup]="loginForm">
     <app-primary-input
@@ -14,7 +16,7 @@
       </app-primary-input>
 
       <app-primary-input
-      formControlName="email"
+      formControlName="password"
       inputName="password"
       type="password"
       label="Your Password: ">
