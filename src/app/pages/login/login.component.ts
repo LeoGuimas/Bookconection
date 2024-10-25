@@ -26,20 +26,22 @@ export class LoginComponent {
     private loginService: LoginService,
     private toastService: ToastrService
   ){
+    this.toastService.toastrConfig.positionClass = 'toast-top-center'; // Define a posição para a esquerda
+
     this.loginForm = new FormGroup({
-      email: new FormControl('',[Validators.required, Validators.email]),
-      password: new FormControl('',[Validators.required, Validators.minLength(6),Validators.maxLength(20),Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')]),
-    })
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')]),
+    });
   }
 
   submit(){
     this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
       next: () => this.toastService.success("Login successful!"),
       error: () => this.toastService.error("Unexpected error! Please try again later")
-    })
+    });
   }
 
   navigate(){
-    this.router.navigate(["/signup"])
+    this.router.navigate(["/signup"]);
   }
 }
