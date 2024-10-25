@@ -6,8 +6,8 @@
   text-align: start;
 
   label {
-    margin-bottom: 20px;
-    font-size: 18px
+    margin-bottom: 18px;
+    font-size: 16px
   }
 
   .input-content {
@@ -18,7 +18,7 @@
     .icon{
       padding: 18px;
       background-color: $primary-color;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 16px 16px 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -30,9 +30,9 @@
 
     input{
       border: none;
-      border-radius: 8px 0 0 8px;
+      border-radius: 16px 0 0 16px;
       background-color: $gray;
-      padding: 20px 0 20px 20px;
+      padding: 12px 0 12px 12px;
       width: 100%;
 
       font-size: 16px;

@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
-import { FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
 
-interface LoginForm {
+interface SignupForm {
+  name: FormControl,
   email: FormControl,
-  password: FormControl
+  password: FormControl,
+  passwordConfirm: FormControl
 }
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-signup',
   standalone: true,
   imports: [
     DefaultLoginLayoutComponent,
@@ -20,11 +22,11 @@ interface LoginForm {
     PrimaryInputComponent,
   ],
   providers: [LoginService],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss'
 })
-export class LoginComponent {
-  loginForm!: FormGroup<LoginForm>;
+export class SignupComponent {
+  signupForm!: FormGroup<SignupForm>;
 
   constructor(
     private router: Router,
@@ -33,20 +35,22 @@ export class LoginComponent {
   ){
     this.toastService.toastrConfig.positionClass = 'toast-top-center'; // Define a posição para a esquerda
 
-    this.loginForm = new FormGroup({
+    this.signupForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')]),
-    });
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')]),
+      });
   }
 
   submit(){
-    this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+    this.loginService.login(this.signupForm.value.email, this.signupForm.value.password).subscribe({
       next: () => this.toastService.success("Login successful!"),
       error: () => this.toastService.error("Unexpected error! Please try again later")
     });
   }
 
   navigate(){
-    this.router.navigate(["signup"]);
+    this.router.navigate(["login"]);
   }
 }
